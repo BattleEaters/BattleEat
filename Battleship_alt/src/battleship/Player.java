@@ -3,6 +3,7 @@ package battleship;
 import java.awt.*;
 import java.awt.event.*;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.Border;
 
@@ -371,7 +372,15 @@ public class Player
 							,m)))
 						{
 							Battleship.getPlayers(Battleship.getYou()).setMHS(k,m,2);
-							this.setBboard(k,m,new ImageIcon("1.png"));
+							try {
+								Image img1 = ImageIO.read(getClass().getResource("parts.png"));
+								
+								this.setBboard(k,m,new ImageIcon(img1));	
+								}				
+						    catch (IOException e) {
+						      System.out.println("Couldn't set field icon: " + e);
+						    }
+										
 						}
 				Battleship.getPlayers(Battleship.getYou()).setGo(2);				
 				Battleship.getPlayers(Battleship.getYou()).setChit(false);
@@ -390,8 +399,19 @@ public class Player
 					for (int m=0;m<11;m++)
 						if(this.boats[f].getName().equals(this.getWhatShip(k
 							,m)))
-						{								
-							this.setBboard(k,m,new ImageIcon("1.png"));
+						{	
+							
+							try {
+								Image img1 = ImageIO.read(getClass().getResource("parts.png"));
+								
+								this.setBboard(k,m,new ImageIcon(img1));	
+								}				
+						    catch (IOException e) {
+						      System.out.println("Couldn't set field icon: " + e);
+						    }
+										
+							
+							
 						}					
 			}
 			return true;
@@ -418,7 +438,18 @@ public class Player
 			for (int k=0;k<11;k++)
 				for (int m=0;m<11;m++)
 					if(z.equals(this.getWhatShip(k,m)))
-						this.setBboard(k,m,new ImageIcon("1.png"));											
+						try {
+							Image img1 = ImageIO.read(getClass().getResource("parts.png"));
+							
+							this.setBboard(k,m,new ImageIcon(img1));	
+							}				
+					    catch (IOException e) {
+					      System.out.println("Couldn't set field icon: " + e);
+					    }
+									
+										
+						
+																
 			return true;
 		}
 		else
@@ -747,22 +778,34 @@ public class Player
 			this.setHits();
 			if (!Battleship.getPlayers(Battleship.getEnemy()).isSunk(x,y))
 			{
-				Battleship.getPlayers(Battleship.getEnemy()).setBboard(x,y,new ImageIcon("1.png"));
-				if ((this.getUser().equals("Computer"))||(this.getUser().equals("CPU1"))||(this.getUser().equals("CPU2")))
-				{	
-					this.setMHS(x,y,1);
-					this.setChit(true);
-				}										
+				try {
+						Image img1 = ImageIO.read(getClass().getResource("parts.png"));
+						Battleship.getPlayers(Battleship.getEnemy()).setBboard(x,y,new ImageIcon(img1));
+						if ((this.getUser().equals("Computer"))||(this.getUser().equals("CPU1"))||(this.getUser().equals("CPU2")))
+						{	
+							this.setMHS(x,y,1);
+							this.setChit(true);
+						}				
+				    } catch (IOException e) {
+				      System.out.println("Couldn't set field icon: " + e);
+				    }
+										
 			}											
 		}
 		else	
 		{	
-			Battleship.getPlayers(Battleship.getEnemy()).setBboard(x,y,new ImageIcon("1.png"));
-			if ((this.getUser().equals("Computer"))||(this.getUser().equals("CPU1"))||(this.getUser().equals("CPU2")))
-			{	
-				this.setMHS(x,y,0);
-				this.setChit(false);
-			}
+			try {
+					Image img1 = ImageIO.read(getClass().getResource("parts.png"));
+					Battleship.getPlayers(Battleship.getEnemy()).setBboard(x,y,new ImageIcon("parts.png"));
+					if ((this.getUser().equals("Computer"))||(this.getUser().equals("CPU1"))||(this.getUser().equals("CPU2")))
+					{	
+						this.setMHS(x,y,0);
+						this.setChit(false);
+					}	
+		    } catch (IOException e) {
+		      System.out.println("Couldn't set field icon: " + e);
+		    }
+			
 		}					
 	}		
 	
@@ -778,9 +821,11 @@ public class Player
 				{					
 					if (source==Battleship.getPlayers(Battleship.getEnemy()).getBboard(i,j))
 					{								
-						if ((Battleship.getPlayers(Battleship.getEnemy()).getBboard(i,j).getBackground()==Color.black)||
+						if /*((Battleship.getPlayers(Battleship.getEnemy()).getBboard(i,j).getIcon().equals(new ImageIcon("parts.png")))||
 							(Battleship.getPlayers(Battleship.getEnemy()).getBboard(i,j).getBackground()==Color.orange)||
-							(Battleship.getPlayers(Battleship.getEnemy()).getBboard(i,j).getBackground()==Color.blue))
+							(Battleship.getPlayers(Battleship.getEnemy()).getBboard(i,j).getBackground()==Color.blue)
+							)*/
+						(Battleship.getPlayers(Battleship.getEnemy()).getBboard(i,j).getIcon()!=null)
 						{
 							JOptionPane.showMessageDialog(null,"You tri"
 							+"ed that spot already.","Wasted Shot",
@@ -959,13 +1004,26 @@ public class Player
 				{
 					for (j=0;j<11;j++)
 					{
-						if ((!this.getWhatShip(i,j).equals(" "))
+						/*if ((!this.getWhatShip(i,j).equals(" "))
 							&&(((this.getBboard(i,j
 						).getBackground())!=Color.black)&&
 									((this.getBboard(i,j
-								).getBackground())!=Color.orange)))							
+								).getBackground())!=Color.orange)))		*/
+								
 							{
-								this.setBboard(i,j,new ImageIcon("1.png"));
+								try {
+									Image img1 = ImageIO.read(getClass().getResource("parts.png"));
+									
+									this.setBboard(i,j,new ImageIcon(img1));
+									}				
+							    catch (IOException e) {
+							      System.out.println("Couldn't set field icon: " + e);
+							    }
+																	
+								
+					
+													
+							
 							}
 					}
 				}									

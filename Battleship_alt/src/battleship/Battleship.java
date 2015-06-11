@@ -13,6 +13,7 @@ import java.util.Vector;
 import java.net.*;
 
 public class Battleship extends JFrame
+
 {		
 	private static JButton ok = new JButton("OK"),//closes stats menu
 						   done =new JButton("Done");//closes options menu
@@ -50,7 +51,7 @@ public class Battleship extends JFrame
 				i,j,//counters							
 				length=5,
 				you=0,
-				prevcolor=0,//index of previous color
+			//	prevcolor=0,//index of previous color
 				prevFirst=0,
 				prevLayout=0,
 				prevLevel=0,//tracks changes in corresponding comboboxes
@@ -406,7 +407,19 @@ public class Battleship extends JFrame
 						((players[t].getUser().equals("Computer"))||(players[t].getUser().equals("CPU1"))||(players[t].getUser().equals("CPU2"))||(players[t].getUser().equals("Unknown")))			
 					{
 						if (players[u].getHitOrMiss(i-1,j-1))
-							players[u].setBboard(i-1,j-1,new ImageIcon("1.png"));						
+									
+						
+						
+						
+						try {
+							Image img1 = ImageIO.read(getClass().getResource("parts.png"));
+							
+							players[u].setBboard(i-1,j-1,new ImageIcon(img1));
+							}				
+					    catch (IOException e) {
+					      System.out.println("Couldn't set field icon: " + e);
+					    }
+						
 					}
 					else
 					{
@@ -915,13 +928,41 @@ public class Battleship extends JFrame
 				for (i=0;i<11;i++)
 					for (j=0;j<11;j++)
 					{
-						if (players[you].getBboard(i,j).getBackground()==color[prevcolor])
-							players[you].setBboard(i,j,new ImageIcon("1.png"));				
-						if (players[enemy].getBboard(i,j).getBackground()
-							==color[prevcolor])
-							players[enemy].setBboard(i,j,new ImageIcon("1.png"));		
+						if(players[you].getBboard(i,j).getIcon()==null)
+						//(players[you].getBboard(i,j).getBackground()==color[prevcolor])
+								
+						
+						try {
+							Image img1 = ImageIO.read(getClass().getResource("parts.png"));
+							
+							players[you].setBboard(i,j,new ImageIcon(img1));	
+							}				
+					    catch (IOException e) {
+					      System.out.println("Couldn't set field icon: " + e);
+					    }
+						
+						
+						
+						
+					if(players[enemy].getBboard(i,j).getIcon()==null)
+						//(players[enemy].getBboard(i,j).getBackground()
+							//==color[prevcolor])
+									
+						
+						
+						
+						try {
+							Image img1 = ImageIO.read(getClass().getResource("parts.png"));
+							
+							players[enemy].setBboard(i,j,new ImageIcon(img1));
+							}				
+					    catch (IOException e) {
+					      System.out.println("Couldn't set field icon: " + e);
+					    }
+									
+						
 					}
-				prevcolor=shipColor.getSelectedIndex();	
+			//	prevcolor=shipColor.getSelectedIndex();	
 			}
 		}	
 		

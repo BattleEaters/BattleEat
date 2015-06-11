@@ -99,6 +99,38 @@ public class Ship
 		return this.hitsleft;
 	}
 	
+	
+	
+	public void clearship ()
+	{				
+		switch (this.dir)
+		{
+			case 0:	{													
+						if  (!this.invalid)
+							for (j=this.y1;j<this.y2;j++)
+							{
+								Battleship.getPlayers(Battleship.getYou()).setBboard(this.x1,j,null);
+								Battleship.getPlayers(Battleship.getYou()).setHitOrMiss(this.x1,j,false);
+								Battleship.getPlayers(Battleship.getYou()).setWhatShip(this.x1,j," ");	
+							}
+					}
+			break;
+			case 1:	{	
+						if (!this.invalid)	
+							for (i=this.x1;i<this.x2;i++)
+							{
+								Battleship.getPlayers(Battleship.getYou()).setBboard(i,this.y1,null);
+								Battleship.getPlayers(Battleship.getYou()).setHitOrMiss(i,this.y1,false);
+								Battleship.getPlayers(Battleship.getYou()).setWhatShip(i,this.y1," ");	
+							}								
+					}
+			break;				
+		}
+	}
+	
+	
+	/*
+	
 	public void clearship ()
 	{				
 		switch (this.dir)
@@ -194,7 +226,7 @@ public class Ship
 					}
 			break;				
 		}
-	}
+	}*/
 	
 	//Method to place the ships	
 	public void placeship()
